@@ -111,4 +111,94 @@ Note:-
 You'll be prompted to enter your AWS Access Key, Secret Access Key, region, and output format.
 
 #### Step 3: Set Up Azure Environment
+
+1. Install the Azure CLI:
+
+   ```
+      curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+2. Log in to your Azure account:
+
+   ```
+      az login
+   
+3. Set your subscription (Optional):
+
+   ```
+      az account set --subscription "subscription_id"
+   
+4. Create a Service Principal for Terraform:
+
+   ```
+      az ad sp create-for-rbac --role="contributor" --scopes="/subscriptions/subscription_id"
+
+Note down the sppId, password, and tenant.
+
+5. Set Up Terraform Configuration:
+- Create a directory for your Terraform files:
+
+  ```
+     mkdir terraform-azure-setup
+     cd terrform-azure-setup
+     
+- Create a main.tf file with the following content:
+  ```
+     provider "azurerm"{
+         features = {}
+
+         tenant_id = "your_tenant_id"
+         subscription_id = "your_subscription_id"
+         client_id = "your_app_id"
+         client_secret = "your password"
+     }
+
+     resource "azurerm_resource_group" "azure_resource"{
+         name = "azure-resources"
+         location = "East US"
+     }
+
+6. Initialize the Terraform Environment:
+
+   ```
+      terraform init
+   ```
+
+7. Validate the Terraform Configuration:
+    
+   ```
+      terraform validate
+   ```
+
+8. Apply the Terraform Configuration:
+
+   ```
+      terraform apply
+   ```
+
+9. Destroy the Terraform Configuration:
+
+   ```
+      terraform destroy
+   ```
+    
 #### Step 4: Set Up GCP Environment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
