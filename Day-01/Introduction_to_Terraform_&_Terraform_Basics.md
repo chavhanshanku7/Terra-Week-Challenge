@@ -42,12 +42,12 @@ To get started with Terraform, you'll first need to install it on your local mac
 3. To update to the latest version of Terraform, first update Homebrew:
 
    ```
-   brew update
+      brew update
 
 4. Then, run the upgrade command to download and use the latest Terraform version:
 
    ```
-   brew upgrade hashicorp/tap/terraform   
+      brew upgrade hashicorp/tap/terraform   
 
 5. Verify the installation:
 
