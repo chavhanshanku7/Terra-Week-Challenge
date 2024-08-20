@@ -56,6 +56,44 @@ To get started with Terraform, you'll first need to install it on your local mac
        terraform -help
 
 - Ubuntu/Debian
+1. Ensure that your system is up to date and you have installed the gnupg, software-properties-common, and curl packages installed. You will use these packages to verify HashiCorp's GPG signature and install HashiCorp's Debian package repository:
+
+   ```
+      sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+
+2. Install the HashiCorp GPG key:
+
+   ```
+      wget -O- https://apt.releases.hashicorp.com/gpg | \
+      gpg --dearmor | \
+      sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+
+3. Verify the key's fingerprint:
+
+   ```
+      gpg --no-default-keyring \
+      --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+      --fingerprint
+
+4. Add the official HashiCorp repository to your system. The lsb_release -cs command finds the distribution release codename for your current system, such as buster, groovy, or sid:
+
+   ```
+      echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+      https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+      sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+5. Download the package information from HashiCorp & install the Terraform:
+
+   ```
+      sudo apt update
+      sudo apt-get install terraform
+   ```
+
+6. Verify the installation
+
+   ```
+      terraform -v
+      terraform -help
   
 #### Step 2: Set Up AWS Environment
 #### Step 3: Set Up Azure Environment
