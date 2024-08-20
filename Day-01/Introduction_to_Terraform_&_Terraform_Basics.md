@@ -25,6 +25,15 @@ Terraform configurations can be reused to reproduce environments with minimal ef
 
 ### How to Install Terraform and Set Up the Environment?
 #### Step 1: Install Terraform
+To get started with Terraform, you'll first need to install it on your local machine. Here’s how to do it on different operating systems:
+
+- Windows
+1. Download the [Terraform binary](https://developer.hashicorp.com/terraform/install#windows) for Windows.
+2. Unzip the downloaded file and move the terraform.exe to a directory included in your system's PATH.
+   
+- macOS
+- Ubuntu/Debian
+  
 #### Step 2: Set Up AWS Environment
 #### Step 3: Set Up Azure Environment
 #### Step 4: Set Up GCP Environment
