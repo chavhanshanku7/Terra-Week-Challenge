@@ -183,6 +183,97 @@ Note down the sppId, password, and tenant.
     
 #### Step 4: Set Up GCP Environment
 
+1. Install the Google Cloud SDK:
+   ```
+      sudo apt-get install apt-transport-https ca-certificates gnupg
+      echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+      curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+      sudo apt-get update && sudo apt-get install google-cloud-sdk
+
+2. Authenticate with GCP:
+   - Initialize the Google CLoud SDK and logged into it.
+     
+   ```
+      gcloud init
+   ```
+    
+   - Follow the prompts to log in and set your default project.
+     
+3. Create a Service Account for Terraform:
+
+   ```
+      gcloud iam service-accounts create terraform
+      --display-name "Terrform Service Account"
+   ```
+   
+4. Grant the neccessary roles to the Service Account:
+
+   ```
+      gcloud projects add-iam-policy-binding YOUR_PROJECT_ID
+      --member="serviceAccount:terraform@YOUR_PROJECT_ID.iam.gserviceaccount.com"
+      --role="roles/editor"
+   ```
+   
+5. Generate a Key file for the Service Account:
+
+   ```
+      gcloud iam service-accounts keys create ~/ terraform-key.json
+      --iam-account terraform@YOUR_PROJECT_ID.iam.gserviceaccount.com
+   ```
+   
+6. Set Up Terraform Configuration:
+   - Create a directory for your Terraform files:
+   ```
+      mkdir terraform-gcp-setup
+      cd terrform-gcp-setup
+   ```
+
+   - Create a main.tf file with the following content:
+   ```
+      provider ""google" {
+         credentails = file("<PATH_TO_KEY_FILE>")
+         project = "YOUR_PROJECT_ID"
+         region = "us-central1"
+      }
+
+      resource "google_compute_instance" "gcp_resource"{
+         name = "terraform-instance"
+         machine_type = "f1-micro"
+         zone = "us-central1-a"
+
+         boot_disk {
+            initialize_params {
+               image = "debian-cloud/debian-9"
+            }
+         }
+
+         network_interface {
+            netwrok = "default"
+            access_config {}
+         }
+      }
+   ```
+Note:- Replace <PATH_TO_KEY_FILE> with the path to your Service Account key file (e.g. ~/terraform-key.json).
+
+7. Initialize the Terraform Environment:
+    
+    ```
+       terraform init
+    
+7. Validate the Terraform Configuration:
+    
+    ```
+       terraform validate
+    
+8. Apply the Terraform Configuration:
+    
+    ```
+       terraform apply
+    
+9.  Destroy the Terraform Configuration:
+
+    ```
+       terraform destroy
 
 
 
