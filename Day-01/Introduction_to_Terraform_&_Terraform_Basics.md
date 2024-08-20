@@ -96,5 +96,19 @@ To get started with Terraform, you'll first need to install it on your local mac
       terraform -help
   
 #### Step 2: Set Up AWS Environment
+To manage AWS infrastructure using Terraform, you'll need to configure your AWS credentials:
+
+1. Install the AWS CLI:
+
+   ```
+      sudo apt-get install awscli -y
+
+3. Configure the AWS CLI:
+   ```
+      aws configure
+
+Note:- 
+You'll be prompted to enter your AWS Access Key, Secret Access Key, region, and output format.
+
 #### Step 3: Set Up Azure Environment
 #### Step 4: Set Up GCP Environment
