@@ -33,18 +33,26 @@ To get started with Terraform, you'll first need to install it on your local mac
 2. Unzip the downloaded file and move the terraform.exe to a directory included in your system's PATH.
    
 - macOS
-1. Run the following command to install Terraform using Homebrew.
-   ```brew tap hashicorp/tap
+1. Run the following command to install Terraform using Homebrew:
+   
+   ```
+      brew tap hashicorp/tap
       brew install hashicorp/tap/terraform
 
-2. To update to the latest version of Terraform, first update Homebrew.
-   ```brew update
+3. To update to the latest version of Terraform, first update Homebrew:
 
-3. Then, run the upgrade command to download and use the latest Terraform version.
-   ```brew upgrade hashicorp/tap/terraform   
+   ```
+   brew update
 
-4. Verify the installation.
-   ``` terraform -v
+4. Then, run the upgrade command to download and use the latest Terraform version:
+
+   ```
+   brew upgrade hashicorp/tap/terraform   
+
+5. Verify the installation:
+
+   ```
+       terraform -v
        terraform -help
 
 - Ubuntu/Debian
