@@ -376,7 +376,7 @@ Data sources allow Terraform to fetch information defined outside of Terraform, 
    ```
 
 #### 9. Terraform validate
-terraform validate is a command that checks whether your Terraform configuration files are syntactically valid and internally consistent. It verifies that the configuration is correct in terms of syntax and structure, ensuring that all required attributes and references are properly defined. However, it does not check if the infrastructure changes will succeed; it only validates the configuration itself.
+'terraform validate' is a command that checks whether your Terraform configuration files are syntactically valid and internally consistent. It verifies that the configuration is correct in terms of syntax and structure, ensuring that all required attributes and references are properly defined. However, it does not check if the infrastructure changes will succeed; it only validates the configuration itself.
 
 Usage:
 Before applying changes, it’s good practice to run terraform validate to catch any errors in your Terraform configuration files.
@@ -386,7 +386,7 @@ Before applying changes, it’s good practice to run terraform validate to catch
    ```
 
 #### 10. Terraform plan
-A Terraform Plan is a command that shows the changes that will be made by Terraform when you run terraform apply. It gives you a preview of what will happen.
+A 'terraform plan' is a command that shows the changes that will be made by Terraform when you run terraform apply. It gives you a preview of what will happen.
 
    ```
       terraform plan
@@ -397,4 +397,4 @@ A Terraform Plan is a command that shows the changes that will be made by Terraf
 
     ```
       terraform apply
-   ```
+
