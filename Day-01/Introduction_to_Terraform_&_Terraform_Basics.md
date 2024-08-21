@@ -274,22 +274,127 @@ Note:- Replace <PATH_TO_KEY_FILE> with the path to your Service Account key file
 
     ```
        terraform destroy
+    ```
 
+### Top important Terraform terminologies
+#### 1. Providers
+Providers are plugins that allow Terraform to interact with APIs of cloud providers, SaaS providers, or other services (e.g., AWS, Azure, GCP).
 
+   ```
+      provider "aws" {
+        region = "us-west-2"
+      }
+   ```
 
+#### 2. Resources
+Resources are the fundamental building blocks of Terraform. They represent the infrastructure components you want to manage, such as virtual machines, storage, or networking.
 
+   ```
+      resource "aws_instance" "web_server" {
+           ami           = "ami-0c55b159cbfafe1f0"
+           instance_type = "t2.micro"
+      }
+   ```
 
+#### 3. Modules
+Modules are containers for multiple resources that are used together. They help in organizing and reusing code across projects.
 
+   ```
+      module "vpc" {
+           source = "terraform-aws-modules/vpc/aws"
+           version = "2.0.0"
+  
+           name = "my-vpc"
+           cidr = "10.0.0.0/16"
+      }
 
+   ```
 
+#### 4. State
+Terraform state is a file that tracks the current state of your infrastructure. Terraform uses this state to map real-world resources to your configuration and to determine what changes need to be applied.
 
+   ```
+      terraform {
+        backend "s3" {
+             bucket = "my-terraform-state"
+             key    = "terraform.tfstate"
+             region = "us-west-2"
+        }
+      }
+   ```
 
+#### 5. Variables
+Variables allow you to parameterize your Terraform configurations, making them more flexible and reusable.
 
+   ```
+      variable "instance_type" {
+           description = "Type of the instance"
+           default     = "t2.micro"
+      }
 
+      resource "aws_instance" "web_server" {
+           ami           = "ami-0c55b159cbfafe1f0"
+           instance_type = var.instance_type
+      }
+   ```
 
+#### 6. Outputs
+Outputs are used to extract information from your Terraform configuration and display it after a Terraform apply operation. This information can be useful for debugging or sharing data between modules.
 
+   ```
+      output "instance_ip" {
+           value = aws_instance.web_server.public_ip
+      }
+   ```
 
+#### 7. Data Sources
+Data sources allow Terraform to fetch information defined outside of Terraform, such as existing resources in your cloud provider. This can be useful when you want to use data from resources not managed by Terraform.
 
+   ```
+      data "aws_ami" "latest" {
+           most_recent = true
+           owners      = ["amazon"]
 
+           filter {
+                name   = "name"
+                values = ["amzn2-ami-hvm-*"]
+           }
+      }
 
+      resource "aws_instance" "web_server" {
+           ami           = data.aws_ami.latest.id
+            instance_type = "t2.micro"
+      }
 
+   ```
+
+#### 8. Terraform init
+'terraform init' initializes a working directory containing Terraform configuration files. It sets up the backend and installs any necessary plugins (providers).
+
+   ```
+      terraform init
+   ```
+
+#### 9. Terraform validate
+terraform validate is a command that checks whether your Terraform configuration files are syntactically valid and internally consistent. It verifies that the configuration is correct in terms of syntax and structure, ensuring that all required attributes and references are properly defined. However, it does not check if the infrastructure changes will succeed; it only validates the configuration itself.
+
+Usage:
+Before applying changes, it’s good practice to run terraform validate to catch any errors in your Terraform configuration files.
+
+   ```
+      terraform validate
+   ```
+
+#### 10. Terraform plan
+A Terraform Plan is a command that shows the changes that will be made by Terraform when you run terraform apply. It gives you a preview of what will happen.
+
+   ```
+      terraform plan
+   ```
+
+#### 11. Terraform apply
+ 'terraform apply' is the command that actually applies the changes required to reach the desired state of the configuration. It makes the changes described in the Terraform plan.
+
+    ```
+      terraform apply
+   ```
