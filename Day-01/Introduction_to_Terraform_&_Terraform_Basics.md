@@ -395,6 +395,5 @@ A 'terraform plan' is a command that shows the changes that will be made by Terr
 #### 11. Terraform apply
  'terraform apply' is the command that actually applies the changes required to reach the desired state of the configuration. It makes the changes described in the Terraform plan.
 
-    ```
       terraform apply
 
